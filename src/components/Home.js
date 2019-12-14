@@ -19,22 +19,28 @@ const Home = props => {
     if (arrivals.length === 0) loadRecipes();
   }, [arrivals]);
 
+  const isLoading = arrivals.length <= 0;
+
   return (
     <div>
       <h2>ホーム画面</h2>
       <div>
         <div>新着: </div>
-        {arrivals.map((recipe, index) => (
-          <div>
-            <Link
-              key={index}
-              to={`recipe/${recipe.id}`}
-              onClick={() => pickRecipe(recipe)}
-            >
-              {recipe.title}
-            </Link>
-          </div>
-        ))}
+        {isLoading ? (
+          <div>loading…</div>
+        ) : (
+          arrivals.map((recipe, index) => (
+            <div>
+              <Link
+                key={index}
+                to={`recipe/${recipe.id}`}
+                onClick={() => pickRecipe(recipe)}
+              >
+                {recipe.title}
+              </Link>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
