@@ -30,9 +30,8 @@ const Home = props => {
           <div>loading…</div>
         ) : (
           arrivals.map((recipe, index) => (
-            <div>
+            <div key={index}>
               <Link
-                key={index}
                 to={`recipe/${recipe.id}`}
                 onClick={() => pickRecipe(recipe)}
               >
