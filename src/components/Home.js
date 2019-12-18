@@ -4,7 +4,8 @@ import { loadRecipes, pickRecipe } from "../actions/recipes";
 import { Link } from "@reach/router";
 
 const mapStateToProps = state => ({
-  arrivals: state.recipes.arrivals
+  arrivals: state.recipes.arrivals,
+  isLoading: state.loading.page
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -13,32 +14,31 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const Home = props => {
-  const { arrivals, loadRecipes, pickRecipe } = props;
+  const { arrivals, isLoading, loadRecipes, pickRecipe } = props;
 
   useEffect(() => {
     if (arrivals.length === 0) loadRecipes();
   }, [arrivals]);
 
-  const isLoading = arrivals.length <= 0;
+  const render = arrivals.map((recipe, index) => (
+    <div key={index}>
+      <Link to={`recipe/${recipe.id}`} onClick={() => pickRecipe(recipe)}>
+        {recipe.title}
+      </Link>
+    </div>
+  ));
 
   return (
     <div>
       <h2>ホーム画面</h2>
       <div>
-        <div>新着: </div>
         {isLoading ? (
-          <div>loading…</div>
+          <div>loading</div>
         ) : (
-          arrivals.map((recipe, index) => (
-            <div key={index}>
-              <Link
-                to={`recipe/${recipe.id}`}
-                onClick={() => pickRecipe(recipe)}
-              >
-                {recipe.title}
-              </Link>
-            </div>
-          ))
+          <div>
+            <div>新着: </div>
+            {render}
+          </div>
         )}
       </div>
     </div>
