@@ -7,7 +7,7 @@ export const PICK_RECIPE = "PICK_RECIPE";
 
 // プロフィール関連
 export const ME_LOADED = "ME_LOADED";
-export const FRIEND_LOADED = "ME_LOADED";
+export const FRIEND_LOADED = "FRIEND_LOADED";
 
 // ローディング関連
 export const SHOW_LOADING = "SHOW_LOADING";
