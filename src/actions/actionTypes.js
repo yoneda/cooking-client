@@ -7,3 +7,7 @@ export const PICK_RECIPE = "PICK_RECIPE";
 
 // プロフィール関連
 export const RECEIVE_PROFILE = "RECEIVE_PROFILE";
+
+// ローディング関連
+export const SHOW_LOADING = "SHOW_LOADING";
+export const HIDE_LOADING = "HIDE_LOADING";
