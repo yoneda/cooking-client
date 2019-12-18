@@ -19,7 +19,15 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const Dashboard = props => {
-  const { posts, stars, profile, loadProfile, loadStars, loadPosts, pickRecipe} = props;
+  const {
+    posts,
+    stars,
+    profile,
+    loadProfile,
+    loadStars,
+    loadPosts,
+    pickRecipe
+  } = props;
   const { name, bio } = props.profile;
 
   useEffect(() => {
@@ -42,12 +50,8 @@ const Dashboard = props => {
       <div>
         <span>投稿したレシピ: </span>
         {posts.map((post, index) => (
-          <div>
-            <Link
-              key={index}
-              to={`../recipe/${post.id}`}
-              onClick={() => pickRecipe(post)}
-            >
+          <div key={index}>
+            <Link to={`../recipe/${post.id}`} onClick={() => pickRecipe(post)}>
               {post.title}
             </Link>
           </div>
@@ -55,16 +59,12 @@ const Dashboard = props => {
       </div>
       <div>
         <span>お気に入りしたレシピ: </span>
-        {stars.map((star,index) => (
-          <div>
-          <Link
-            key={index}
-            to={`../recipe/${star.id}`}
-            onClick={() => pickRecipe(star)}
-          >
-            {star.title}
-          </Link>
-        </div>
+        {stars.map((star, index) => (
+          <div key={index}>
+            <Link to={`../recipe/${star.id}`} onClick={() => pickRecipe(star)}>
+              {star.title}
+            </Link>
+          </div>
         ))}
       </div>
     </div>
