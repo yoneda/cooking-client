@@ -6,7 +6,7 @@ import Settings from "./Settings";
 import Register from "./Register";
 import Login from "./Login";
 import Recipe from "./Recipe";
-import User from "./User";
+import Friend from "./Friend";
 import { Router, Link } from "@reach/router";
 
 const App = () => (
@@ -27,7 +27,7 @@ const App = () => (
       <Register path="register" />
       <Login path="login" />
       <Recipe path="recipe/:recipeId" />
-      <User path="user/:account" />
+      <Friend path="user/:account" />
     </Router>
   </div>
 );

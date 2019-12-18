@@ -2,50 +2,39 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "@reach/router";
 import { isEmpty } from "lodash";
-import { loadFriendProfile } from "../actions/profile";
-import { loadStars, loadPosts, pickRecipe } from "../actions/recipes";
+import { loadFriendPage } from "../actions/profile";
+import { pickRecipe } from "../actions/recipes";
 
 const mapStateToProps = state => ({
   profile: state.profile.friend,
   posts: state.recipes.posts,
-  stars: state.recipes.stars
+  stars: state.recipes.stars,
+  isLoading: state.loading.page
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadProfile: account => loadFriendProfile(account)(dispatch),
-  loadStars: account => loadStars(account)(dispatch),
-  loadPosts: account => loadPosts(account)(dispatch),
+  loadFriend: account => loadFriendPage(account)(dispatch),
   pickRecipe: recipe => dispatch(pickRecipe(recipe))
 });
 
-const User = props => {
+const Friend = props => {
   const {
     account,
     posts,
     stars,
     profile,
-    loadProfile,
-    loadStars,
-    loadPosts,
+    isLoading,
+    loadFriend,
     pickRecipe
   } = props;
   const { name, bio } = props.profile;
 
   useEffect(() => {
-    if (isEmpty(profile)) loadProfile(account);
+    if (isEmpty(profile)) loadFriend(account);
   }, [profile]);
 
-  useEffect(() => {
-    if (stars.length === 0) loadStars(account);
-  }, [stars]);
-
-  useEffect(() => {
-    if (posts.length === 0) loadPosts(account);
-  }, [posts]);
-
-  return (
+  const render = (
     <div>
-      <h2>ユーザページ画面</h2>
       <div>名前: {name}</div>
       <div>自己紹介: {bio}</div>
       <div>
@@ -70,6 +59,13 @@ const User = props => {
       </div>
     </div>
   );
+
+  return (
+    <div>
+      <h2>ユーザページ画面</h2>
+      {isLoading ? <div>loading…</div> : render}
+    </div>
+  );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(User);
+export default connect(mapStateToProps, mapDispatchToProps)(Friend);

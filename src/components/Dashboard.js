@@ -2,49 +2,31 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "@reach/router";
 import { isEmpty } from "lodash";
-import { loadMyProfile } from "../actions/profile";
-import { loadStars, loadPosts, pickRecipe } from "../actions/recipes";
+import { loadDashboardPage } from "../actions/profile";
+import { pickRecipe } from "../actions/recipes";
 
 const mapStateToProps = state => ({
   profile: state.profile.me,
   posts: state.recipes.posts,
-  stars: state.recipes.stars
+  stars: state.recipes.stars,
+  isLoading: state.loading.page
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadProfile: account => loadMyProfile(account)(dispatch),
-  loadStars: account => loadStars(account)(dispatch),
-  loadPosts: account => loadPosts(account)(dispatch),
+  loadDashboard: account => loadDashboardPage(account)(dispatch),
   pickRecipe: recipe => dispatch(pickRecipe(recipe))
 });
 
 const Dashboard = props => {
-  const {
-    posts,
-    stars,
-    profile,
-    loadProfile,
-    loadStars,
-    loadPosts,
-    pickRecipe
-  } = props;
+  const { posts, stars, profile, isLoading, loadDashboard, pickRecipe } = props;
   const { name, bio } = props.profile;
 
   useEffect(() => {
-    if (isEmpty(profile)) loadProfile("smatsuoka");
-  }, [props.profile]);
+    if (isEmpty(profile)) loadDashboard("smatsuoka");
+  }, [profile]);
 
-  useEffect(() => {
-    if (stars.length === 0) loadStars("smatsuoka");
-  }, [stars]);
-
-  useEffect(() => {
-    if (posts.length === 0) loadPosts("smatsuoka");
-  }, [posts]);
-
-  return (
+  const render = (
     <div>
-      <h2>マイページ画面</h2>
       <div>名前: {name}</div>
       <div>自己紹介: {bio}</div>
       <div>
@@ -67,6 +49,13 @@ const Dashboard = props => {
           </div>
         ))}
       </div>
+    </div>
+  );
+
+  return (
+    <div>
+      <h2>マイページ画面</h2>
+      {isLoading ? <div>loading…</div> : render}
     </div>
   );
 };
