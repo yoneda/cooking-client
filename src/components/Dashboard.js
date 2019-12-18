@@ -1,28 +1,29 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "@reach/router";
-import { loadProfile } from "../actions/profile";
+import { isEmpty } from "lodash";
+import { loadMyProfile } from "../actions/profile";
 import { loadStars, loadPosts, pickRecipe } from "../actions/recipes";
 
 const mapStateToProps = state => ({
-  profile: state.profile,
+  profile: state.profile.me,
   posts: state.recipes.posts,
   stars: state.recipes.stars
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadProfile: account => loadProfile(account)(dispatch),
+  loadProfile: account => loadMyProfile(account)(dispatch),
   loadStars: account => loadStars(account)(dispatch),
   loadPosts: account => loadPosts(account)(dispatch),
   pickRecipe: recipe => dispatch(pickRecipe(recipe))
 });
 
 const Dashboard = props => {
-  const { posts, stars, loadProfile, loadStars, loadPosts, pickRecipe} = props;
+  const { posts, stars, profile, loadProfile, loadStars, loadPosts, pickRecipe} = props;
   const { name, bio } = props.profile;
 
   useEffect(() => {
-    if (props.profile.name === "") loadProfile("smatsuoka");
+    if (isEmpty(profile)) loadProfile("smatsuoka");
   }, [props.profile]);
 
   useEffect(() => {

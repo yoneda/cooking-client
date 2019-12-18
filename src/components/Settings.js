@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
-import { loadProfile, updateProfile } from "../actions/profile";
+import { isEmpty } from "lodash";
+import { loadMyProfile, updateMyProfile } from "../actions/profile";
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  profile: state.profile.me
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadProfile: account => loadProfile(account)(dispatch),
-  updateProfile: (account, profile) => updateProfile(account, profile)(dispatch)
+  loadProfile: account => loadMyProfile(account)(dispatch),
+  updateProfile: (account, profile) =>
+    updateMyProfile(account, profile)(dispatch)
   // TODO: 上記は冗長なのでシンプルにかけてかつわかりやすいライブラリがないか探す
 });
 
@@ -23,7 +25,7 @@ const Settings = props => {
 
   // component did mount
   useEffect(() => {
-    if (profile.name === "") loadProfile("smatsuoka");
+    if (isEmpty(profile)) loadProfile("smatsuoka");
   }, []);
 
   // component did update

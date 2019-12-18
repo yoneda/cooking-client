@@ -1,16 +1,16 @@
-import { RECEIVE_PROFILE } from "../actions/actionTypes";
+import { ME_LOADED, FRIEND_LOADED } from "../actions/actionTypes";
 
 const initialState = {
-  name: "",
-  bio: "",
-  mail: "",
-  password: ""
+  me: {},
+  friend: {}
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case RECEIVE_PROFILE:
-      return action.payload;
+    case ME_LOADED:
+      return {...state, me: action.payload};
+    case FRIEND_LOADED:
+      return {...state, friend: action.payload};
     default:
       return state;
   }

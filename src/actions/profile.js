@@ -1,17 +1,20 @@
-import { RECEIVE_PROFILE } from "./actionTypes";
+import { ME_LOADED, FRIEND_LOADED } from "./actionTypes";
 import agent from "../agent";
 
-export const receiveProfile = payload => ({
-  type: RECEIVE_PROFILE,
-  payload
-});
+// MEMO: 冗長すぎるため、action-creatorは省略した
 
-export const loadProfile = account => async dispatch => {
+export const loadMyProfile = account => async dispatch => {
   const { user } = await agent.Profile.get(account);
-  dispatch(receiveProfile(user));
+  dispatch({ type: ME_LOADED, payload: user });
 };
 
-export const updateProfile = (account, profile) => async dispatch => {
-  const { user } = await agent.Profile.edit(account, profile);
-  dispatch(receiveProfile(user));
+export const updateMyProfile = account => async dispatch => {
+  const { user } = await agent.Profile.edit(account);
+  dispatch({ type: ME_LOADED, payload: user });
 };
+
+export const  loadFriendProfile = account => async dispatch => {
+  const { user } = await agent.Profile.get(account);
+  dispatch({ type: FRIEND_LOADED, payload: user });
+}
+
