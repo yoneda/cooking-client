@@ -13,7 +13,5 @@ export const FRIEND_LOADED = "FRIEND_LOADED";
 export const SHOW_LOADING = "SHOW_LOADING";
 export const HIDE_LOADING = "HIDE_LOADING";
 
-// 認証
-export const LOGIN = "LOGIN";
-export const REGISTER = "REGISTER";
-export const LOGOUT = "LOGOUT";
+// その他
+export const SET_ACCOUNT = "SET_ACCOUNT";

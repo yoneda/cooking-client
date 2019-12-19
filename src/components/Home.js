@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { loadRecipes, pickRecipe } from "../actions/recipes";
 import { Link } from "@reach/router";
-import { LOGIN } from "../actions/actionTypes";
+import { login, logout } from "../actions/common";
 
 const mapStateToProps = state => ({
   arrivals: state.recipes.arrivals,
@@ -11,11 +11,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadRecipes: () => loadRecipes()(dispatch),
-  pickRecipe: recipe => dispatch(pickRecipe(recipe))
+  pickRecipe: recipe => dispatch(pickRecipe(recipe)),
+  login: (account, password) => login(account, password)(dispatch),
+  logout: () => logout()(dispatch)
 });
 
 const Home = props => {
-  const { arrivals, isLoading, loadRecipes, pickRecipe } = props;
+  const { arrivals, isLoading, loadRecipes, pickRecipe, login, logout } = props;
 
   useEffect(() => {
     if (arrivals.length === 0) loadRecipes();
@@ -29,11 +31,10 @@ const Home = props => {
     </div>
   ));
 
-  const dispatch = useDispatch();
-
   return (
     <div>
-      <button onClick={() => dispatch({ type: LOGIN })}>login</button>
+      <button onClick={() => login("smatsuoka", "password")}>login</button>
+      <button onClick={() => logout()}>logout</button>
       <h2>ホーム画面</h2>
       <div>
         {isLoading ? (
