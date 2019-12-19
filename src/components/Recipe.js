@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "@reach/router";
 import { isEmpty } from "lodash";
 import { loadOneRecipe } from "../actions/recipes";
 
@@ -16,15 +17,19 @@ const Recipe = props => {
 
   // component did mount / component did update
   useEffect(() => {
-    if (isEmpty(picked)===true){
+    if (isEmpty(picked) === true) {
       loadOneRecipe(recipeId);
     }
-  },[picked]);
+  }, [picked]);
 
   return (
     <div>
       <h2>レシピ画面</h2>
       <div>タイトル: {picked.title && picked.title}</div>
+      <div>
+        投稿者:{" "}
+        <Link to={`../../user/${picked.account}`}>{picked.account}</Link>
+      </div>
       <div>費用: {picked.cost && picked.cost}円, </div>
       <div>調理時間: {picked.cookTime && picked.cookTime}分</div>
       <div>
@@ -41,4 +46,4 @@ const Recipe = props => {
   );
 };
 
-export default connect(mapStateToProps,mapDispatchToProps)(Recipe);
+export default connect(mapStateToProps, mapDispatchToProps)(Recipe);

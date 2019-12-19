@@ -30,7 +30,7 @@ const Friend = props => {
   const { name, bio } = props.profile;
 
   useEffect(() => {
-    if (isEmpty(profile)) loadFriend(account);
+    if (isEmpty(profile) || profile.account !== account) loadFriend(account);
   }, [profile]);
 
   const render = (
