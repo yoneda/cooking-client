@@ -12,3 +12,8 @@ export const FRIEND_LOADED = "FRIEND_LOADED";
 // ローディング関連
 export const SHOW_LOADING = "SHOW_LOADING";
 export const HIDE_LOADING = "HIDE_LOADING";
+
+// 認証
+export const LOGIN = "LOGIN";
+export const REGISTER = "REGISTER";
+export const LOGOUT = "LOGOUT";

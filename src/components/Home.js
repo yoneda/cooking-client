@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { loadRecipes, pickRecipe } from "../actions/recipes";
 import { Link } from "@reach/router";
+import { LOGIN } from "../actions/actionTypes";
 
 const mapStateToProps = state => ({
   arrivals: state.recipes.arrivals,
@@ -28,8 +29,11 @@ const Home = props => {
     </div>
   ));
 
+  const dispatch = useDispatch();
+
   return (
     <div>
+      <button onClick={() => dispatch({ type: LOGIN })}>login</button>
       <h2>ホーム画面</h2>
       <div>
         {isLoading ? (
