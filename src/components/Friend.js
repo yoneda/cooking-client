@@ -41,7 +41,7 @@ const Friend = props => {
         <span>投稿したレシピ: </span>
         {posts.map((post, index) => (
           <div key={index}>
-            <Link to={`../recipe/${post.id}`} onClick={() => pickRecipe(post)}>
+            <Link to={`/recipe/${post.id}`} onClick={() => pickRecipe(post)}>
               {post.title}
             </Link>
           </div>
@@ -51,7 +51,7 @@ const Friend = props => {
         <span>お気に入りしたレシピ: </span>
         {stars.map((star, index) => (
           <div key={index}>
-            <Link to={`../recipe/${star.id}`} onClick={() => pickRecipe(star)}>
+            <Link to={`/recipe/${star.id}`} onClick={() => pickRecipe(star)}>
               {star.title}
             </Link>
           </div>

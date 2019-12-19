@@ -28,7 +28,7 @@ const Recipe = props => {
       <div>タイトル: {picked.title && picked.title}</div>
       <div>
         投稿者:{" "}
-        <Link to={`../../user/${picked.account}`}>{picked.account}</Link>
+        <Link to={`/user/${picked.account}`}>{picked.account}</Link>
       </div>
       <div>費用: {picked.cost && picked.cost}円, </div>
       <div>調理時間: {picked.cookTime && picked.cookTime}分</div>

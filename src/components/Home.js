@@ -22,7 +22,7 @@ const Home = props => {
 
   const render = arrivals.map((recipe, index) => (
     <div key={index}>
-      <Link to={`recipe/${recipe.id}`} onClick={() => pickRecipe(recipe)}>
+      <Link to={`/recipe/${recipe.id}`} onClick={() => pickRecipe(recipe)}>
         {recipe.title}
       </Link>
     </div>
