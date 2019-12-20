@@ -3,13 +3,13 @@ import { combineReducers } from "redux";
 import profile from "./profile";
 import recipes from "./recipes";
 import loading from "./loading";
-import commom from "./commom";
+import common from "./common";
 
 const rootReducer = combineReducers({
   profile,
   recipes,
   loading,
-  commom
+  common
 });
 
 export default rootReducer;

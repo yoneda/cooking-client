@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { login } from "../actions/common";
 
-const Login = () => {
+const mapDispatchToProps = dispatch => ({
+  login: (account, password) => login(account, password)(dispatch)
+});
+
+const Login = props => {
+  const { login } = props;
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   return (
@@ -32,4 +39,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default connect(undefined, mapDispatchToProps)(Login);

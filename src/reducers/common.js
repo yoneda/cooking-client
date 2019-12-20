@@ -1,7 +1,7 @@
 import { SET_ACCOUNT } from "../actions/actionTypes";
 
 const initialState = {
-  correntAccount: ""
+  currentAccount: ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,7 +10,7 @@ const reducer = (state = initialState, action) => {
       console.log(action);
       return {
         ...state,
-        correntAccount: action.payload
+        currentAccount: action.payload
       };
     default:
       return state;
