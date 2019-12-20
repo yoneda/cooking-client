@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { navigate } from "@reach/router"
 import { login } from "../actions/common";
 
 const mapDispatchToProps = dispatch => ({
-  login: (account, password) => login(account, password)(dispatch)
+  login: (account, password, successHandler) => login(account, password, successHandler)(dispatch)
 });
 
 const Login = props => {
   const { login } = props;
-  const [mail, setMail] = useState("");
+  const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
   return (
     <div>
       <h2>ログイン画面</h2>
       <div>
-        メール: <br />
+        アカウント: <br />
         <input
           type="text"
           style={{ width: "300px" }}
-          value={mail}
-          onChange={event => setMail(event.target.value)}
+          value={account}
+          onChange={event => setAccount(event.target.value)}
         />
       </div>
       <div>
@@ -32,7 +33,10 @@ const Login = props => {
         />
       </div>
       <br />
-      <button onClick={() => console.log("ユーザ登録リクエストを送る")}>
+      <button onClick={() => {
+        const onSuccess = () => navigate("/");
+        login(account,password,onSuccess);
+      }}>
         login
       </button>
     </div>
