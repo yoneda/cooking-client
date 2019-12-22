@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Home from "./Home";
 import Editor from "./Editor";
 import Dashboard from "./Dashboard";
@@ -9,6 +9,7 @@ import Login from "./Login";
 import Recipe from "./Recipe";
 import Friend from "./Friend";
 import { Router, Link } from "@reach/router";
+import { logout } from "../actions/common";
 
 const LoginedNav = () => (
   <nav>
@@ -26,11 +27,17 @@ const AnyOneNav = () => (
 
 const App = () => {
   const account = useSelector(state => state.common.currentAccount);
+  const dispatch = useDispatch();
 
   return (
     <div>
       {account ? <LoginedNav /> : <AnyOneNav />}
-      {account && <div>ログイン中: {account}</div>}
+      {account && (
+        <div>
+          ログイン中: {account}
+          <br /> <button onClick={() => logout()(dispatch)}>logout</button>
+        </div>
+      )}
       <Router>
         <Home path="/" />
         <Editor path="editor" />
