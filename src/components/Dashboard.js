@@ -6,6 +6,7 @@ import { loadDashboardPage } from "../actions/profile";
 import { pickRecipe } from "../actions/recipes";
 
 const mapStateToProps = state => ({
+  account: state.common.currentAccount,
   profile: state.profile.me,
   posts: state.recipes.posts,
   stars: state.recipes.stars,
@@ -18,11 +19,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const Dashboard = props => {
-  const { posts, stars, profile, isLoading, loadDashboard, pickRecipe } = props;
+  const { account, posts, stars, profile, isLoading, loadDashboard, pickRecipe } = props;
   const { name, bio } = props.profile;
 
   useEffect(() => {
-    if (isEmpty(profile)) loadDashboard("smatsuoka");
+    if (isEmpty(profile)) loadDashboard(account);
   }, [profile]);
 
   const render = (

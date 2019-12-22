@@ -4,6 +4,7 @@ import { isEmpty } from "lodash";
 import { loadMyProfile, updateMyProfile } from "../actions/profile";
 
 const mapStateToProps = state => ({
+  account: state.common.currentAccount,
   profile: state.profile.me
 });
 
@@ -15,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const Settings = props => {
-  const { loadProfile, updateProfile, profile } = props;
+  const { account, loadProfile, updateProfile, profile } = props;
 
   // constructor
   const [name, setName] = useState(profile.name);
@@ -25,7 +26,7 @@ const Settings = props => {
 
   // component did mount
   useEffect(() => {
-    if (isEmpty(profile)) loadProfile("smatsuoka");
+    if (isEmpty(profile)) loadProfile(account);
   }, []);
 
   // component did update
