@@ -1,7 +1,5 @@
 import {
   SET_ACCOUNT,
-  LOGIN_ERROR,
-  REGISTER_ERROR
 } from "../actions/actionTypes";
 
 const initialState = {

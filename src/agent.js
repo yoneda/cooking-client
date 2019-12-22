@@ -5,9 +5,9 @@ const root = "https://cook-example.herokuapp.com";
 const tokenPlugin = req => {
   const token = window.localStorage.getItem("jwt");
   if (token) {
-    req.set('authorization', `Bearer ${token}`);
+    req.set("authorization", `Bearer ${token}`);
   }
-}
+};
 
 const Recipes = {
   all: () => request.get(`${root}/recipes`).then(res => res.body),
@@ -26,6 +26,11 @@ const Recipes = {
 
 const Profile = {
   get: account => request.get(`${root}/users/${account}`).then(res => res.body),
+  post: (account, password) =>
+    request
+      .post(`${root}/users`)
+      .query({ account, password })
+      .then(res => res.body),
   edit: (account, profile) =>
     request
       .put(`${root}/users/${account}`)
@@ -44,5 +49,5 @@ const Auth = {
 export default {
   Recipes,
   Profile,
-  Auth,
+  Auth
 };

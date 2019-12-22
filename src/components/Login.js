@@ -5,7 +5,7 @@ import { login } from "../actions/common";
 
 const mapDispatchToProps = dispatch => ({
   login: (account, password, successHandler, errorHandler) =>
-    login(account, password, successHandler, errorHandler)(dispatch)
+    login(account, password, successHandler, errorHandler)(dispatch),
 });
 
 const Login = props => {
@@ -37,7 +37,7 @@ const Login = props => {
       <div>
         パスワード: <br />
         <input
-          type="text"
+          type="password"
           style={{ width: "300px" }}
           value={password}
           onChange={event => setPassword(event.target.value)}
