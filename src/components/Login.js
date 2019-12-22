@@ -3,26 +3,25 @@ import { connect } from "react-redux";
 import { navigate } from "@reach/router";
 import { login } from "../actions/common";
 
-const mapStateToProps = state => ({
-  message: state.common.loginError
-});
-
 const mapDispatchToProps = dispatch => ({
   login: (account, password, successHandler, errorHandler) =>
     login(account, password, successHandler, errorHandler)(dispatch)
 });
 
 const Login = props => {
-  const { message, login } = props;
+  const { login } = props;
+  const [error, setError] = useState("");
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
+
   return (
     <div>
       <h2>ログイン画面</h2>
       <div>
-        {message && (
+        {error && (
           <div>
-            <div style={{ color: "red" }}>{message}</div><br />
+            <div style={{ color: "red" }}>{error}</div>
+            <br />
           </div>
         )}
       </div>
@@ -49,6 +48,7 @@ const Login = props => {
         onClick={() => {
           const onSuccess = () => navigate("/");
           const onError = () => {
+            setError("ユーザ名かパスワードのどちらかが間違っています");
             setAccount("");
             setPassword("");
           };
@@ -61,4 +61,4 @@ const Login = props => {
   );
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(undefined, mapDispatchToProps)(Login);

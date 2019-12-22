@@ -5,9 +5,7 @@ import {
 } from "../actions/actionTypes";
 
 const initialState = {
-  currentAccount: "",
-  loginError: "",
-  registerError: ""
+  currentAccount: ""
 };
 
 const reducer = (state = initialState, action) => {
@@ -16,16 +14,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentAccount: action.payload
-      };
-    case LOGIN_ERROR:
-      return {
-        ...state,
-        loginError: action.payload
-      };
-    case REGISTER_ERROR:
-      return {
-        ...state,
-        loginError: action.payload
       };
     default:
       return state;

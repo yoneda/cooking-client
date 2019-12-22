@@ -15,5 +15,3 @@ export const HIDE_LOADING = "HIDE_LOADING";
 
 // その他
 export const SET_ACCOUNT = "SET_ACCOUNT";
-export const LOGIN_ERROR = "LOGIN_ERROR";
-export const REGISTER_ERROR = "REGISTER_ERROR";
