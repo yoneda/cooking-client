@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { navigate } from "@reach/router";
 import { useLegacyState } from "../hooks";
 import { register } from "../actions/common";
+import passValidate from "../helpers/passValidate";
 
 const mapDispatchToProps = dispatch => ({
   register: (account, password, successHandler, errorHandler) =>
@@ -58,15 +59,20 @@ const Register = props => {
       <br />
       <button
         onClick={() => {
-          const onSuccess = () => navigate("/");
-          const onError = () => {
+          const onError = message => {
             setState({
-              error: "このアカウントは既に登録されています",
+              error: message,
               account: "",
               pass: "",
               checkPass: ""
             });
           };
+          const error = passValidate(state.pass, state.checkPass);
+          if (error) {
+            onError(error);
+            return;
+          }
+          const onSuccess = () => navigate("/");
           register(state.account, state.pass, onSuccess, onError);
         }}
       >

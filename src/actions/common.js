@@ -8,7 +8,7 @@ export const register = (
   onError
 ) => async dispatch => {
   const response = await agent.Profile.post(account, password).catch(error =>
-    onError()
+    onError("このアカウントは既に登録されています")
   );
   if (response) {
     window.localStorage.setItem("jwt", response.user.token);

@@ -8,7 +8,7 @@ import Register from "./Register";
 import Login from "./Login";
 import Recipe from "./Recipe";
 import Friend from "./Friend";
-import { Router, Link } from "@reach/router";
+import { Router, Link, navigate } from "@reach/router";
 import { logout } from "../actions/common";
 
 const LoginedNav = () => (
@@ -35,7 +35,15 @@ const App = () => {
       {account && (
         <div>
           ログイン中: {account}
-          <br /> <button onClick={() => logout()(dispatch)}>logout</button>
+          <br />{" "}
+          <button
+            onClick={() => {
+              logout()(dispatch);
+              navigate("/");
+            }}
+          >
+            logout
+          </button>
         </div>
       )}
       <Router>

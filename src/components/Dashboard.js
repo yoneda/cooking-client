@@ -19,12 +19,20 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const Dashboard = props => {
-  const { account, posts, stars, profile, isLoading, loadDashboard, pickRecipe } = props;
+  const {
+    account,
+    posts,
+    stars,
+    profile,
+    isLoading,
+    loadDashboard,
+    pickRecipe
+  } = props;
   const { name, bio } = props.profile;
 
   useEffect(() => {
-    if (isEmpty(profile)) loadDashboard(account);
-  }, [profile]);
+    if (isEmpty(profile) || account !== profile.account) loadDashboard(account);
+  }, [account, profile]);
 
   const render = (
     <div>
