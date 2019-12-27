@@ -13,15 +13,15 @@ import { logout } from "../actions/common";
 
 const LoginedNav = () => (
   <nav>
-    <Link to="/">Home</Link> | <Link to="editor">New</Link> |{" "}
-    <Link to="dashboard">Dashboard</Link> | <Link to="settings">Setting</Link>
+    <Link to="/">ホーム</Link> | <Link to="editor">新規投稿</Link> |{" "}
+    <Link to="dashboard">マイページ</Link> | <Link to="settings">設定</Link>
   </nav>
 );
 
 const AnyOneNav = () => (
   <nav>
-    <Link to="/">Home</Link> | <Link to="register">Register</Link> |{" "}
-    <Link to="login">Login</Link>
+    <Link to="/">ホーム</Link> | <Link to="register">登録</Link> |{" "}
+    <Link to="login">ログイン</Link>
   </nav>
 );
 
