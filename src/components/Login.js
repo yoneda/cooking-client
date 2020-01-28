@@ -44,6 +44,10 @@ const Login = props => {
         />
       </div>
       <br />
+      <div>
+        以下をご利用ください。<br />
+        アカウント: smatsuoka, パスワード: password<br /><br />
+      </div>
       <button
         onClick={() => {
           const onSuccess = () => navigate("/");
